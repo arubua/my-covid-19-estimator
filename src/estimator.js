@@ -20,9 +20,9 @@ const covid19ImpactEstimator = (data) => {
     if (periodType === 'days') {
       infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc(timeToElapse / 3);
     } else if (periodType === 'weeks') {
-      infectionsByRequestedTime = this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 7) / 3);
+      infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc((timeToElapse * 7) / 3);
     } else if (periodType === 'months') {
-      infectionsByRequestedTime = this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 30) / 3);
+      infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc((timeToElapse * 30) / 3);
     }
     return { currentlyInfected, infectionsByRequestedTime };
   };
@@ -31,11 +31,11 @@ const covid19ImpactEstimator = (data) => {
     const currentlyInfected = reportedCases * 50;
     let infectionsByRequestedTime = 0;
     if (periodType === 'days') {
-      infectionsByRequestedTime = this.currentlyInfected * 2 ** Math.trunc(timeToElapse / 3);
+      infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc(timeToElapse / 3);
     } else if (periodType === 'weeks') {
-      infectionsByRequestedTime = this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 7) / 3);
+      infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc((timeToElapse * 7) / 3);
     } else if (periodType === 'months') {
-      infectionsByRequestedTime = this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 30) / 3);
+      infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc((timeToElapse * 30) / 3);
     }
     return { currentlyInfected, infectionsByRequestedTime };
   };
