@@ -20,31 +20,37 @@ const covid19ImpactEstimator = () => {
     impact: {
       currentlyInfected: (reportedCases) => reportedCases * 10,
       infectionsByRequestedTime: (periodType, timeToElapse) => {
-        let infectionsByRequestedTime = 0;
-        const { currentlyInfected } = this;
-        if (periodType === 'days') {
-          infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc(timeToElapse / 3);
-        } else if (periodType === 'weeks') {
-          infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc((timeToElapse * 7) / 3);
-        } else if (periodType === 'months') {
-          infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc((timeToElapse * 30) / 3);
+        switch (periodType) {
+          case 'days':
+            return this.currentlyInfected * 2 ** Math.trunc(timeToElapse / 3);
+
+          case 'weeks':
+            return this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 7) / 3);
+          case 'months':
+            return this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 30) / 3);
+
+          default:
+            break;
         }
-        return infectionsByRequestedTime;
+        return null;
       }
     },
     severeImpact: {
       currentlyInfected: (reportedCases) => reportedCases * 50,
       infectionsByRequestedTime: (periodType, timeToElapse) => {
-        let infectionsByRequestedTime = 0;
-        const { currentlyInfected } = this;
-        if (periodType === 'days') {
-          infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc(timeToElapse / 3);
-        } else if (periodType === 'weeks') {
-          infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc((timeToElapse * 7) / 3);
-        } else if (periodType === 'months') {
-          infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc((timeToElapse * 30) / 3);
+        switch (periodType) {
+          case 'days':
+            return this.currentlyInfected * 2 ** Math.trunc(timeToElapse / 3);
+
+          case 'weeks':
+            return this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 7) / 3);
+          case 'months':
+            return this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 30) / 3);
+
+          default:
+            break;
         }
-        return infectionsByRequestedTime;
+        return null;
       }
     }
   };
