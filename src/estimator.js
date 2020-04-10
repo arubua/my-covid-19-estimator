@@ -1,5 +1,4 @@
-/* eslint-disable linebreak-style */
-const data = {
+const input = {
   region: {
     name: 'Africa',
     avgAge: 19.7,
@@ -13,46 +12,38 @@ const data = {
   totalHospitalBeds: 1380614
 };
 
-const covid19ImpactEstimator = () => {
-  const input = data;
+const covid19ImpactEstimator = (data) => {
+  const { reportedCases, periodType, timeToElapse } = data;
+  const getImpact = () => {
+    const currentlyInfected = reportedCases * 10;
+    let infectionsByRequestedTime = 0;
+    if (periodType === 'days') {
+      infectionsByRequestedTime = currentlyInfected * 2 ** Math.trunc(timeToElapse / 3);
+    } else if (periodType === 'weeks') {
+      infectionsByRequestedTime = this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 7) / 3);
+    } else if (periodType === 'months') {
+      infectionsByRequestedTime = this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 30) / 3);
+    }
+    return { currentlyInfected, infectionsByRequestedTime };
+  };
+
+  const getSevereImpact = () => {
+    const currentlyInfected = reportedCases * 50;
+    let infectionsByRequestedTime = 0;
+    if (periodType === 'days') {
+      infectionsByRequestedTime = this.currentlyInfected * 2 ** Math.trunc(timeToElapse / 3);
+    } else if (periodType === 'weeks') {
+      infectionsByRequestedTime = this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 7) / 3);
+    } else if (periodType === 'months') {
+      infectionsByRequestedTime = this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 30) / 3);
+    }
+    return { currentlyInfected, infectionsByRequestedTime };
+  };
+
   return {
     data: input,
-    impact: {
-      currentlyInfected: (reportedCases) => reportedCases * 10,
-      infectionsByRequestedTime: (periodType, timeToElapse) => {
-        switch (periodType) {
-          case 'days':
-            return this.currentlyInfected * 2 ** Math.trunc(timeToElapse / 3);
-
-          case 'weeks':
-            return this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 7) / 3);
-          case 'months':
-            return this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 30) / 3);
-
-          default:
-            break;
-        }
-        return null;
-      }
-    },
-    severeImpact: {
-      currentlyInfected: (reportedCases) => reportedCases * 50,
-      infectionsByRequestedTime: (periodType, timeToElapse) => {
-        switch (periodType) {
-          case 'days':
-            return this.currentlyInfected * 2 ** Math.trunc(timeToElapse / 3);
-
-          case 'weeks':
-            return this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 7) / 3);
-          case 'months':
-            return this.currentlyInfected * 2 ** Math.trunc((timeToElapse * 30) / 3);
-
-          default:
-            break;
-        }
-        return null;
-      }
-    }
+    impact: getImpact(),
+    severeImpact: getSevereImpact()
   };
 };
 
